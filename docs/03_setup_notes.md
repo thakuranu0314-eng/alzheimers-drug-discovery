@@ -218,21 +218,6 @@ CREATE TABLE assay_results (
 
 ---
 
-## Mistakes I hit (and how to fix them)
-
-- **Stuck `...>` prompt** = SQLite is waiting for me to finish a statement.
-  Fix: type a lone `;` (or press Ctrl-C) to cancel and get back to `sqlite>`.
-- **Pasted the `____` placeholders literally** → table built with wrong types.
-  Fix: `DROP TABLE name;` then recreate correctly. (Empty table = nothing lost.)
-- **Typos** (`makdir`, `INTEAGER`, `.schema smaple_...`) → SQLite/zsh is strict about
-  exact spelling. "command not found" or empty output usually just means a typo.
-- **Trailing comma trap:** comma after every column EXCEPT the last one, then `);`.
-- **`references` is a reserved word** → wrap the table name in double quotes.
-- **Green square not showing:** commits only count toward the GitHub graph if the
-  commit email matches an email on the GitHub account. Check with `git config user.email`.
-
----
-
 ## Next step
 
 **Step 2 — Populate the tables:** extract the real thesis data (21 plant species,
