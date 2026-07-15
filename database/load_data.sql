@@ -18,7 +18,8 @@ DELETE FROM plants;
 DELETE FROM plant_parts;
 
 -- ---------- plant_parts ----------
--- Stored verbatim from the thesis, cleaned to singular + lowercase.
+-- Part names from thesis Table 2.2, normalised to singular + lowercase
+-- (thesis writes 'Leaves', 'Stems'; stored here as 'leaf', 'stem').
 -- NOTE: compound parts ('leaf + stalk') are a known 1NF trade-off —
 -- only 4 of 34 extracts use them. See docs/02_database_design.md.
 INSERT INTO plant_parts (part_id, part_name) VALUES
@@ -32,7 +33,7 @@ INSERT INTO plant_parts (part_id, part_name) VALUES
 
 -- ---------- plants ----------
 -- 21 species across 15 families.
--- selection_score: LOWER = higher priority (thesis §2.3).
+-- selection_score: LOWER = higher priority (thesis Table 2.1).
 -- traditional_use left NULL for now — long prose, to be added later.
 INSERT INTO plants (plant_id, species_name, genus, family, selection_score, voucher_number) VALUES
     (1,  'Centella asiatica',        'Centella',        'Apiaceae',         5, 'PRU 124298'),
