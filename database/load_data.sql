@@ -1,27 +1,9 @@
--- ============================================================
--- AI-Powered Alzheimer's Drug Discovery Dashboard
--- Phase 1, Step 2: Load data
---
--- Source: A. Thakur, PhD thesis (University of Pretoria)
---   - Table 2.2  → plant species, families, vouchers
---   - Section 2.3 → selection scores
---
--- Run with:  sqlite3 drug_discovery.db < load_data.sql
--- Safe to re-run: clears these tables first.
--- ============================================================
-
 PRAGMA foreign_keys = ON;
 
--- Make the script re-runnable (children first, then parents)
 DELETE FROM extracts;
 DELETE FROM plants;
 DELETE FROM plant_parts;
 
--- ---------- plant_parts ----------
--- Part names from thesis Table 2.2, normalised to singular + lowercase
--- (thesis writes 'Leaves', 'Stems'; stored here as 'leaf', 'stem').
--- NOTE: compound parts ('leaf + stalk') are a known 1NF trade-off —
--- only 4 of 34 extracts use them. See docs/02_database_design.md.
 INSERT INTO plant_parts (part_id, part_name) VALUES
     (1, 'leaf'),
     (2, 'stem'),
@@ -31,10 +13,6 @@ INSERT INTO plant_parts (part_id, part_name) VALUES
     (6, 'seed'),
     (7, 'seed pod');
 
--- ---------- plants ----------
--- 21 species across 15 families.
--- selection_score: LOWER = higher priority (thesis Table 2.1).
--- traditional_use left NULL for now — long prose, to be added later.
 INSERT INTO plants (plant_id, species_name, genus, family, selection_score, voucher_number) VALUES
     (1,  'Centella asiatica',        'Centella',        'Apiaceae',         5, 'PRU 124298'),
     (2,  'Heteromorpha arborescens', 'Heteromorpha',    'Apiaceae',         7, 'PRU 124318'),
@@ -57,3 +35,39 @@ INSERT INTO plants (plant_id, species_name, genus, family, selection_score, vouc
     (19, 'Zanthoxylum capense',      'Zanthoxylum',     'Rutaceae',         6, 'PRU 124316'),
     (20, 'Buddleja salvifolia',      'Buddleja',        'Scrophulariaceae', 7, 'PRU 124307'),
     (21, 'Cissus quadrangularis',    'Cissus',          'Vitaceae',         8, 'PRU 124317');
+
+INSERT INTO extracts (extract_id, plant_id, part_id, yield_pct) VALUES
+    (1,  1,  3, 13.9),
+    (2,  2,  1, 8.7),
+    (3,  3,  1, 10.3),
+    (4,  3,  2, 7.6),
+    (5,  4,  2, 12.5),
+    (6,  4,  6, 23.3),
+    (7,  4,  7, 3.1),
+    (8,  5,  1, 13.0),
+    (9,  6,  4, 7.6),
+    (10, 7,  1, 20.9),
+    (11, 7,  2, 6.0),
+    (12, 8,  1, 5.7),
+    (13, 8,  2, 7.7),
+    (14, 9,  1, 24.5),
+    (15, 10, 1, 13.0),
+    (16, 10, 2, 6.9),
+    (17, 11, 1, 11.2),
+    (18, 12, 1, 2.2),
+    (19, 12, 2, 6.1),
+    (20, 13, 1, 9.2),
+    (21, 14, 1, 12.5),
+    (22, 14, 2, 5.4),
+    (23, 15, 1, 9.9),
+    (24, 15, 2, 6.8),
+    (25, 16, 1, 19.3),
+    (26, 16, 2, 7.1),
+    (27, 17, 3, 10.5),
+    (28, 18, 1, 22.8),
+    (29, 18, 2, 10.5),
+    (30, 19, 1, 7.2),
+    (31, 19, 5, 9.1),
+    (32, 20, 1, 10.5),
+    (33, 20, 2, 6.0),
+    (34, 21, 2, 9.6);
