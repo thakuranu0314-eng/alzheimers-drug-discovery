@@ -81,3 +81,33 @@ INSERT INTO assay_results (result_id, bioassay_id, extract_id, concentration, co
     (32,1,32,50,'ug/mL',NULL,NULL,'significant; exact % to confirm from Fig 2.5-2.8'),
     (33,1,33,50,'ug/mL',NULL,NULL,'tested, not significant'),
     (34,1,34,50,'ug/mL',NULL,NULL,'tested, not significant');
+
+INSERT INTO compounds (compound_id, compound_name, molecular_class, id_status, id_method) VALUES
+    (1,'isoquercetin','flavonoid','tentative','UPLC-QTOF-MS'),
+    (2,'myricetin-3-O-alpha-L-rhamnopyranoside','flavonoid','tentative','UPLC-QTOF-MS'),
+    (3,'quercetin-3-O-rhamnoside','flavonoid','tentative','UPLC-QTOF-MS'),
+    (4,'quercetin','flavonoid','tentative','UPLC-QTOF-MS'),
+    (5,'quinic acid','organic acid','tentative','UPLC-QTOF-MS'),
+    (6,'3,5-dicaffeoylquinic acid','phenolic acid','tentative','UPLC-QTOF-MS'),
+    (7,'rutin','flavonoid','tentative','UPLC-QTOF-MS'),
+    (8,'valeriananoid E','saponin','tentative','UPLC-QTOF-MS'),
+    (9,'acuminoside','saponin','tentative','UPLC-QTOF-MS'),
+    (10,'dictamnoside D','saponin','tentative','UPLC-QTOF-MS'),
+    (11,'2''''-O-beta-D-glucopyranosylsaikosaponin B2','saponin','tentative','UPLC-QTOF-MS'),
+    (12,'clinoposaponin C','saponin','tentative','UPLC-QTOF-MS'),
+    (13,'spinasaponin C','saponin','tentative','UPLC-QTOF-MS'),
+    (14,'cynarin','phenolic acid','tentative','UPLC-QTOF-MS'),
+    (15,'alternoside IX','saponin','tentative','UPLC-QTOF-MS'),
+    (16,'alternoside I','saponin','tentative','UPLC-QTOF-MS'),
+    (17,'saikogenin B4','saponin','tentative','UPLC-QTOF-MS'),
+    (18,'acetylated glycosydated crotoxigenin','cardenolide glycoside','isolated','NMR'),
+    (19,'xysmalogenin-3-beta-D-glucopyranoside','cardenolide glycoside','isolated','NMR'),
+    (20,'crotoxigenin-3-O-beta-digitalopyranoside','cardenolide glycoside','isolated','NMR'),
+    (21,'desglucouzarin','cardenolide glycoside','isolated','NMR');
+
+INSERT INTO sample_compounds (id, compound_id, extract_id) VALUES
+    (1,1,20),(2,2,20),(3,3,20),(4,4,20),
+    (5,5,12),(6,6,12),(7,7,12),(8,8,12),(9,9,12),
+    (10,10,12),(11,11,12),(12,12,12),(13,13,12),
+    (14,14,2),(15,15,2),(16,16,2),(17,17,2),
+    (18,18,9),(19,19,9),(20,20,9),(21,21,9);
