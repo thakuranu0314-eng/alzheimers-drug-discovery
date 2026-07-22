@@ -51,9 +51,9 @@ Pretoria.
 | Phase | Deliverable | Status |
 |---|---|---|
 | 1 · Data engineering | 9-table SQLite schema | ✅ done |
-| | Thesis data → CSV → loaded via ETL | ✅ next |
-| 2 · Analysis | EDA + visualisations | ✅ |
-| 3 · Product | Streamlit dashboard | ✅ |
+| | Thesis data → CSV → loaded via ETL | ✅ done|
+| 2 · Analysis | EDA + visualisations | ✅ done |
+| 3 · Product | Streamlit dashboard | ✅ done (It wasn’t very informative, so I didn’t add much information about this.) |
 | 4 · ML | compound activity prediction (RDKit descriptors + SHAP) | ⬜ |
 | 5 · LLM | RAG assistant over thesis + literature | ⬜ |
 | 6 · Deploy | hosted app + documentation | ⬜ |
