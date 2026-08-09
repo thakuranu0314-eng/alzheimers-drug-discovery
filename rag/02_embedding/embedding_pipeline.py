@@ -37,9 +37,10 @@ def create_embeddings(chunks, model):
     texts = [chunk["text"] for chunk in chunks]
 
     embeddings = model.encode(
-        texts,
-        show_progress_bar=True,
-    )
+    texts,
+    show_progress_bar=True,
+    normalize_embeddings=True,
+)
 
     return embeddings
 
