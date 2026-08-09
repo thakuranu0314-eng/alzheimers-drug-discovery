@@ -38,38 +38,62 @@ def clean_text(text):
     return text.strip()
 
 
-def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
+def chunk_text(
+    text,
+    chunk_size=CHUNK_SIZE,
+    overlap=CHUNK_OVERLAP,
+    min_chunk_size=500,
+):
     """
-    Split text into overlapping chunks while trying
-    to preserve sentence boundaries.
+    Split text into overlapping chunks.
+
+    The function aims for approximately `chunk_size` characters,
+    prefers sentence boundaries when possible, and avoids creating
+    very small chunks.
     """
 
     chunks = []
-
     start = 0
     text_length = len(text)
 
     while start < text_length:
-        end = min(start + chunk_size, text_length)
+        remaining_text = text_length - start
 
-        # If we are not at the end of the text,
-        # try to stop at the last sentence boundary.
-        if end < text_length:
-            sentence_end = text.rfind(". ", start, end)
+        # If the remaining text is small, keep it as the final chunk.
+        if remaining_text <= chunk_size:
+            final_chunk = text[start:].strip()
 
-            if sentence_end > start:
-                end = sentence_end + 1
+            if final_chunk:
+                # Merge a very small final chunk with the previous chunk.
+                if len(final_chunk) < min_chunk_size and chunks:
+                    chunks[-1] = f"{chunks[-1]} {final_chunk}".strip()
+                else:
+                    chunks.append(final_chunk)
+
+            break
+
+        target_end = start + chunk_size
+
+        # Search for a sentence ending only in the latter part
+        # of the desired chunk.
+        search_start = start + min_chunk_size
+
+        sentence_end = text.rfind(
+            ". ",
+            search_start,
+            target_end,
+        )
+
+        if sentence_end != -1:
+            end = sentence_end + 1
+        else:
+            end = target_end
 
         chunk = text[start:end].strip()
 
         if chunk:
             chunks.append(chunk)
 
-        # Stop if we reached the end
-        if end >= text_length:
-            break
-
-        # Keep overlap between neighboring chunks
         start = max(end - overlap, start + 1)
 
     return chunks
